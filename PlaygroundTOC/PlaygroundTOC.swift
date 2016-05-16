@@ -51,10 +51,10 @@ class PlaygroundTOC: NSObject {
 
     func initialize() -> Bool {
         guard let mainMenu = NSApp.mainMenu else { return false }
-        guard let item = mainMenu.itemWithTitle("Edit") else { return false }
+        guard let item = mainMenu.itemWithTitle("File") else { return false }
         guard let submenu = item.submenu else { return false }
 
-        let actionMenuItem = NSMenuItem(title:"Do Action", action:#selector(self.doMenuAction), keyEquivalent:"")
+        let actionMenuItem = NSMenuItem(title:"Generate Playground TOC", action:#selector(self.doMenuAction), keyEquivalent:"")
         actionMenuItem.target = self
 
         submenu.addItem(NSMenuItem.separatorItem())
@@ -64,8 +64,44 @@ class PlaygroundTOC: NSObject {
     }
 
     func doMenuAction() {
-        let error = NSError(domain: "Hello World!", code:42, userInfo:nil)
-        NSAlert(error: error).runModal()
+        guard
+        let workspaceWindowControllers = NSClassFromString("IDEWorkspaceWindowController")?.valueForKey("workspaceWindowControllers") as? [AnyObject]
+            else {
+                NSBeep()
+                return
+        }
+        
+        var workspace: AnyObject?
+        
+        for controller in workspaceWindowControllers {
+            if let window = controller.valueForKey("window") as? NSObject {
+                if window == NSApp.keyWindow {
+                    workspace = controller.valueForKey("_workspace")
+                }
+            }
+        }
+        
+        guard let path = workspace?.valueForKey("representingFilePath")?.valueForKey("_pathString") as? String else {
+            NSBeep()
+            return
+        }
+        
+        let playgroundURL = NSURL.fileURLWithPath(path)
+        
+        guard playgroundURL.pathExtension == "playground" else {
+            NSBeep()
+            return
+        }
+        
+        let parser = ContentsParser(playgroundURL: playgroundURL)
+        guard let toc = parser.createTOC() else {
+            NSBeep()
+            return
+        }
+        
+        let pb = NSPasteboard.generalPasteboard()
+        pb.clearContents()
+        pb.setString(toc, forType: NSPasteboardTypeString)
     }
 }
 

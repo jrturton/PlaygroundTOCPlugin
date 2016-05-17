@@ -8,6 +8,58 @@
 
 import Foundation
 
+struct Playground {
+    let pages: [PlaygroundPage]
+    
+    var toc: String {
+        let toc = pages.reduce("/*:\n") {
+            let link = "- \($1.link)\n"
+            return $0 + link
+        }
+        return toc + "*/"
+    }
+    
+    func navigationLinksForPage(pageName: String) -> String? {
+        
+        guard let index = pages.indexOf({ $0.pageName == pageName }) else { return nil }
+    
+        var linkText = "//:"
+        
+        if index > 0 {
+            linkText += (pages[index - 1].previousLink) + "\t"
+        }
+        linkText += "\(index + 1) of \(pages.count)\t"
+        
+        if index < pages.count - 1 {
+            linkText += pages[index + 1].nextLink
+        }
+        
+        return linkText
+    }
+        
+}
+
+struct PlaygroundPage {
+    let title: String
+    let pageName: String
+    
+    var escapedName: String {
+        return pageName.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet()) ?? pageName
+    }
+    
+    var link: String {
+        return "[\(title)](\(escapedName))"
+    }
+    
+    var previousLink: String {
+        return "[Previous: \(title)](\(escapedName))"
+    }
+    
+    var nextLink: String {
+        return "[Next: \(title)](\(escapedName))"
+    }
+}
+
 class ContentsParser: NSObject {
     
     let playgroundURL: NSURL
@@ -58,20 +110,17 @@ class ContentsParser: NSObject {
         return title as? String
     }
     
-    func createTOC() -> String? {
+    func parsePlayground() -> Playground? {
+        
         guard let names = readPagesFromContents() else { return nil }
-        let namesAndTitles: [(String,String)] = names.map {
+        let pages: [PlaygroundPage] = names.map {
             let pageURL = pageURLFromPageName($0)
             let pageContentURL = pageContentURLFromPageURL(pageURL)
-            return ($0, pageTitle(pageContentURL) ?? $0)
+            let title = pageTitle(pageContentURL) ?? $0
+            return PlaygroundPage(title: title, pageName: $0)
         }
         
-        let toc = namesAndTitles.reduce("/*:\n") {
-            let link = "- [\($1.1)](\($1.0))\n"
-            return $0 + link
-        }
-        
-        return toc + "*/"
+        return Playground(pages: pages)
     }
 }
 

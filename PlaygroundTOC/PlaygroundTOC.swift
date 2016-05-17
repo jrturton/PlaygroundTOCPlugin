@@ -54,54 +54,87 @@ class PlaygroundTOC: NSObject {
         guard let item = mainMenu.itemWithTitle("File") else { return false }
         guard let submenu = item.submenu else { return false }
 
-        let actionMenuItem = NSMenuItem(title:"Generate Playground TOC", action:#selector(self.doMenuAction), keyEquivalent:"")
-        actionMenuItem.target = self
+        let tocMenuItem = NSMenuItem(title:"Generate Playground TOC", action:#selector(self.createTOC), keyEquivalent:"")
+        tocMenuItem.target = self
 
         submenu.addItem(NSMenuItem.separatorItem())
-        submenu.addItem(actionMenuItem)
+        submenu.addItem(tocMenuItem)
 
+        let linkMenuItem = NSMenuItem(title: "Generate Page Previous / Next Links", action: #selector(self.generateNavigationLinks), keyEquivalent: "")
+        linkMenuItem.target = self
+        submenu.addItem(linkMenuItem)
         return true
     }
 
-    func doMenuAction() {
-        guard
-        let workspaceWindowControllers = NSClassFromString("IDEWorkspaceWindowController")?.valueForKey("workspaceWindowControllers") as? [AnyObject]
-            else {
-                NSBeep()
-                return
-        }
+    func createTOC() {
         
-        var workspace: AnyObject?
-        
-        for controller in workspaceWindowControllers {
-            if let window = controller.valueForKey("window") as? NSObject {
-                if window == NSApp.keyWindow {
-                    workspace = controller.valueForKey("_workspace")
-                }
-            }
-        }
-        
-        guard let path = workspace?.valueForKey("representingFilePath")?.valueForKey("_pathString") as? String else {
-            NSBeep()
-            return
-        }
-        
-        let playgroundURL = NSURL.fileURLWithPath(path)
-        
-        guard playgroundURL.pathExtension == "playground" else {
-            NSBeep()
-            return
-        }
-        
-        let parser = ContentsParser(playgroundURL: playgroundURL)
-        guard let toc = parser.createTOC() else {
+        guard let playground = currentPlayground() else {
             NSBeep()
             return
         }
         
         let pb = NSPasteboard.generalPasteboard()
         pb.clearContents()
-        pb.setString(toc, forType: NSPasteboardTypeString)
+        pb.setString(playground.toc, forType: NSPasteboardTypeString)
+    }
+    
+    func windowController() -> NSWindowController? {
+        guard let currentWindowController = NSApp.keyWindow?.windowController else { return nil }
+        guard currentWindowController.isKindOfClass(NSClassFromString("IDEWorkspaceWindowController")!) else { return nil }
+        
+        return currentWindowController
+    }
+    
+    func currentPlayground() -> Playground? {
+        
+        guard let workspace = windowController()?.valueForKey("_workspace") else { return nil }
+        
+        guard let path = workspace.valueForKey("representingFilePath")?.valueForKey("_pathString") as? String else {
+            return nil
+        }
+        
+        let playgroundURL = NSURL.fileURLWithPath(path)
+        
+        guard playgroundURL.pathExtension == "playground" else {
+            return nil
+        }
+        
+        let parser = ContentsParser(playgroundURL: playgroundURL)
+        return parser.parsePlayground()
+    }
+    
+    func currentPageName() -> String? {
+        
+        guard let editor = windowController()?.valueForKeyPath("editorArea.lastActiveEditorContext.editor") else { return nil }
+        
+        var document: NSDocument! = nil
+        
+        if editor.isKindOfClass(NSClassFromString("IDESourceCodeEditor")!) {
+            document = editor.valueForKey("sourceCodeDocument") as? NSDocument
+        } else if editor.isKindOfClass(NSClassFromString("IDESourceCodeComparisonEditor")!) {
+            document = editor.valueForKey("primaryDocument") as? NSDocument
+        }
+        
+        guard document != nil else { return nil }
+        let playgroundPageExtension = ".xcplaygroundpage"
+        guard document.displayName.hasSuffix(playgroundPageExtension) else { return nil }
+        return document.displayName.stringByReplacingOccurrencesOfString(playgroundPageExtension, withString: "")
+        
+    }
+    
+    func generateNavigationLinks() {
+        guard
+        let name = currentPageName(),
+        let playground = currentPlayground(),
+        let linkText = playground.navigationLinksForPage(name)
+        else {
+            NSBeep()
+            return
+        }
+        
+        let pb = NSPasteboard.generalPasteboard()
+        pb.clearContents()
+        pb.setString(linkText, forType: NSPasteboardTypeString)
     }
 }
 

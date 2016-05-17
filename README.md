@@ -1,6 +1,6 @@
 # PlaygroundTOC
 
-Xcode plugin for creating a TOC for multi-page playgrounds. 
+Xcode plugin for creating a TOC and navigation links for multi-page playgrounds. 
 
 Not yet submitted to Alcatraz, but you can install it yourself by building and running the project.
 
@@ -15,3 +15,5 @@ The format of the TOC is:
 ```
 
 Where `Page Title` is taken from the first line of text in the playground with one or more header (`#`) markdown tags. 
+
+To create titled Previous / Next links choose **File** > **Generate Page Previous / Next Links**, which will copy to the clipboard named links to the previous and next pages (where applicable) and an `x of y` page count indicator. 

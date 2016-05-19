@@ -60,7 +60,7 @@ class PlaygroundTOC: NSObject {
         submenu.addItem(NSMenuItem.separatorItem())
         submenu.addItem(tocMenuItem)
 
-        let linkMenuItem = NSMenuItem(title: "Generate Page Previous / Next Links", action: #selector(self.generateNavigationLinks), keyEquivalent: "")
+        let linkMenuItem = NSMenuItem(title: "Insert Previous / Next Links", action: #selector(self.generateNavigationLinks), keyEquivalent: "")
         linkMenuItem.target = self
         submenu.addItem(linkMenuItem)
         return true
@@ -124,17 +124,21 @@ class PlaygroundTOC: NSObject {
     
     func generateNavigationLinks() {
         guard
-        let name = currentPageName(),
-        let playground = currentPlayground(),
-        let linkText = playground.navigationLinksForPage(name)
+        let playground = currentPlayground()
         else {
             NSBeep()
             return
         }
         
-        let pb = NSPasteboard.generalPasteboard()
-        pb.clearContents()
-        pb.setString(linkText, forType: NSPasteboardTypeString)
+        for page in playground.pages {
+            if let linkText = playground.navigationLinksForPage(page.pageName) {
+                do {
+                    try addNavigationLinks(linkText, toContents: page.pageContentURL)
+                } catch {
+                    NSBeep()
+                }
+            }
+        }
     }
 }
 

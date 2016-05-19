@@ -10,6 +10,7 @@
 		7989ABFD1CE9DDA200609DB0 /* PlaygroundTOC.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 7989ABFC1CE9DDA200609DB0 /* PlaygroundTOC.xcscheme */; };
 		7989ABFF1CE9DDA200609DB0 /* PlaygroundTOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989ABFE1CE9DDA200609DB0 /* PlaygroundTOC.swift */; };
 		7989AC071CE9E20B00609DB0 /* PlaygroundParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989AC061CE9E20B00609DB0 /* PlaygroundParser.swift */; };
+		79AE64901CEDB42200042D2E /* PlaygroundUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE648F1CEDB42200042D2E /* PlaygroundUpdater.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,7 @@
 		7989ABFE1CE9DDA200609DB0 /* PlaygroundTOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundTOC.swift; sourceTree = "<group>"; };
 		7989AC001CE9DDA200609DB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7989AC061CE9E20B00609DB0 /* PlaygroundParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundParser.swift; sourceTree = "<group>"; };
+		79AE648F1CEDB42200042D2E /* PlaygroundUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundUpdater.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -42,6 +44,7 @@
 			children = (
 				7989ABFE1CE9DDA200609DB0 /* PlaygroundTOC.swift */,
 				7989AC061CE9E20B00609DB0 /* PlaygroundParser.swift */,
+				79AE648F1CEDB42200042D2E /* PlaygroundUpdater.swift */,
 				7989AC001CE9DDA200609DB0 /* Info.plist */,
 				7989ABFB1CE9DDA200609DB0 /* Supporting Files */,
 			);
@@ -124,6 +127,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7989ABFF1CE9DDA200609DB0 /* PlaygroundTOC.swift in Sources */,
+				79AE64901CEDB42200042D2E /* PlaygroundUpdater.swift in Sources */,
 				7989AC071CE9E20B00609DB0 /* PlaygroundParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

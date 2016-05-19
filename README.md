@@ -16,4 +16,4 @@ The format of the TOC is:
 
 Where `Page Title` is taken from the first line of text in the playground with one or more header (`#`) markdown tags. 
 
-To create titled Previous / Next links choose **File** > **Generate Page Previous / Next Links**, which will copy to the clipboard named links to the previous and next pages (where applicable) and an `x of y` page count indicator. 
+To create titled Previous / Next links choose **File** > **Insert Page Previous / Next Links**, which will add or update named links to the previous and next pages (where applicable) and an `x of y` page count indicator to every page in the playground. 

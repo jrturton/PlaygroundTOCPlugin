@@ -26,12 +26,12 @@ struct Playground {
         var linkText = "//:"
         
         if index > 0 {
-            linkText += (pages[index - 1].previousLink) + "\t"
+            linkText += (pages[index - 1].previousLink) + "  |  "
         }
-        linkText += "\(index + 1) of \(pages.count)\t"
+        linkText += "page \(index + 1) of \(pages.count)"
         
         if index < pages.count - 1 {
-            linkText += pages[index + 1].nextLink
+            linkText += "  |  " + pages[index + 1].nextLink
         }
         
         return linkText
@@ -42,6 +42,7 @@ struct Playground {
 struct PlaygroundPage {
     let title: String
     let pageName: String
+    let pageContentURL: NSURL
     
     var escapedName: String {
         return pageName.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet()) ?? pageName
@@ -52,11 +53,11 @@ struct PlaygroundPage {
     }
     
     var previousLink: String {
-        return "[Previous: \(title)](\(escapedName))"
+        return "[Previous](@previous)"
     }
     
     var nextLink: String {
-        return "[Next: \(title)](\(escapedName))"
+        return "[Next: \(title)](@next)"
     }
 }
 
@@ -117,7 +118,7 @@ class ContentsParser: NSObject {
             let pageURL = pageURLFromPageName($0)
             let pageContentURL = pageContentURLFromPageURL(pageURL)
             let title = pageTitle(pageContentURL) ?? $0
-            return PlaygroundPage(title: title, pageName: $0)
+            return PlaygroundPage(title: title, pageName: $0, pageContentURL: pageContentURL)
         }
         
         return Playground(pages: pages)

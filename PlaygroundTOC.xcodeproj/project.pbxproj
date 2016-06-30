@@ -7,14 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7989ABFD1CE9DDA200609DB0 /* PlaygroundTOC.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 7989ABFC1CE9DDA200609DB0 /* PlaygroundTOC.xcscheme */; };
-		7989ABFF1CE9DDA200609DB0 /* PlaygroundTOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989ABFE1CE9DDA200609DB0 /* PlaygroundTOC.swift */; };
-		7989AC071CE9E20B00609DB0 /* PlaygroundParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989AC061CE9E20B00609DB0 /* PlaygroundParser.swift */; };
-		79AE64901CEDB42200042D2E /* PlaygroundUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE648F1CEDB42200042D2E /* PlaygroundUpdater.swift */; };
+		7925D7361D25315A00FE0867 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D7351D25315A00FE0867 /* main.swift */; };
+		795266231D253435000367A6 /* CommandLineSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795266221D253435000367A6 /* CommandLineSupport.swift */; };
+		795266241D25368C000367A6 /* PlaygroundParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989AC061CE9E20B00609DB0 /* PlaygroundParser.swift */; };
+		795266251D25368C000367A6 /* PlaygroundUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE648F1CEDB42200042D2E /* PlaygroundUpdater.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7925D7311D25315A00FE0867 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		7989ABF81CE9DDA200609DB0 /* PlaygroundTOC.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaygroundTOC.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		7925D7331D25315A00FE0867 /* pglinks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pglinks; sourceTree = BUILT_PRODUCTS_DIR; };
+		7925D7351D25315A00FE0867 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		795266221D253435000367A6 /* CommandLineSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLineSupport.swift; sourceTree = "<group>"; };
 		7989ABFC1CE9DDA200609DB0 /* PlaygroundTOC.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PlaygroundTOC.xcscheme; path = PlaygroundTOC.xcodeproj/xcshareddata/xcschemes/PlaygroundTOC.xcscheme; sourceTree = SOURCE_ROOT; };
 		7989ABFE1CE9DDA200609DB0 /* PlaygroundTOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundTOC.swift; sourceTree = "<group>"; };
 		7989AC001CE9DDA200609DB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -22,11 +36,31 @@
 		79AE648F1CEDB42200042D2E /* PlaygroundUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundUpdater.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		7925D7301D25315A00FE0867 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
+		7925D7341D25315A00FE0867 /* pglinks */ = {
+			isa = PBXGroup;
+			children = (
+				7925D7351D25315A00FE0867 /* main.swift */,
+				795266221D253435000367A6 /* CommandLineSupport.swift */,
+			);
+			path = pglinks;
+			sourceTree = "<group>";
+		};
 		7989ABF01CE9DDA200609DB0 = {
 			isa = PBXGroup;
 			children = (
 				7989ABFA1CE9DDA200609DB0 /* PlaygroundTOC */,
+				7925D7341D25315A00FE0867 /* pglinks */,
 				7989ABF91CE9DDA200609DB0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -34,7 +68,7 @@
 		7989ABF91CE9DDA200609DB0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7989ABF81CE9DDA200609DB0 /* PlaygroundTOC.xcplugin */,
+				7925D7331D25315A00FE0867 /* pglinks */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,21 +96,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7989ABF71CE9DDA200609DB0 /* PlaygroundTOC */ = {
+		7925D7321D25315A00FE0867 /* pglinks */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7989AC031CE9DDA200609DB0 /* Build configuration list for PBXNativeTarget "PlaygroundTOC" */;
+			buildConfigurationList = 7925D7391D25315A00FE0867 /* Build configuration list for PBXNativeTarget "pglinks" */;
 			buildPhases = (
-				7989ABF51CE9DDA200609DB0 /* Sources */,
-				7989ABF61CE9DDA200609DB0 /* Resources */,
+				7925D72F1D25315A00FE0867 /* Sources */,
+				7925D7301D25315A00FE0867 /* Frameworks */,
+				7925D7311D25315A00FE0867 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = PlaygroundTOC;
-			productName = PlaygroundTOC;
-			productReference = 7989ABF81CE9DDA200609DB0 /* PlaygroundTOC.xcplugin */;
-			productType = "com.apple.product-type.bundle";
+			name = pglinks;
+			productName = pglinks;
+			productReference = 7925D7331D25315A00FE0867 /* pglinks */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -85,11 +120,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Richard Turton";
 				TargetAttributes = {
-					7989ABF71CE9DDA200609DB0 = {
+					7925D7321D25315A00FE0867 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -105,36 +141,44 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7989ABF71CE9DDA200609DB0 /* PlaygroundTOC */,
+				7925D7321D25315A00FE0867 /* pglinks */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		7989ABF61CE9DDA200609DB0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7989ABFD1CE9DDA200609DB0 /* PlaygroundTOC.xcscheme in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		7989ABF51CE9DDA200609DB0 /* Sources */ = {
+		7925D72F1D25315A00FE0867 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7989ABFF1CE9DDA200609DB0 /* PlaygroundTOC.swift in Sources */,
-				79AE64901CEDB42200042D2E /* PlaygroundUpdater.swift in Sources */,
-				7989AC071CE9E20B00609DB0 /* PlaygroundParser.swift in Sources */,
+				795266251D25368C000367A6 /* PlaygroundUpdater.swift in Sources */,
+				7925D7361D25315A00FE0867 /* main.swift in Sources */,
+				795266241D25368C000367A6 /* PlaygroundParser.swift in Sources */,
+				795266231D253435000367A6 /* CommandLineSupport.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		7925D7371D25315A00FE0867 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		7925D7381D25315A00FE0867 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		7989AC011CE9DDA200609DB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -216,55 +260,23 @@
 			};
 			name = Release;
 		};
-		7989AC041CE9DDA200609DB0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = "$(HOME)";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = PlaygroundTOC/Info.plist;
-				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.commandshift.PlaygroundTOC;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xcplugin;
-			};
-			name = Debug;
-		};
-		7989AC051CE9DDA200609DB0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = "$(HOME)";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				INFOPLIST_FILE = PlaygroundTOC/Info.plist;
-				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				LD_RUNPATH_SEARCH_PATHS = "$(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.commandshift.PlaygroundTOC;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xcplugin;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7925D7391D25315A00FE0867 /* Build configuration list for PBXNativeTarget "pglinks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7925D7371D25315A00FE0867 /* Debug */,
+				7925D7381D25315A00FE0867 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7989ABF41CE9DDA200609DB0 /* Build configuration list for PBXProject "PlaygroundTOC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7989AC011CE9DDA200609DB0 /* Debug */,
 				7989AC021CE9DDA200609DB0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7989AC031CE9DDA200609DB0 /* Build configuration list for PBXNativeTarget "PlaygroundTOC" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7989AC041CE9DDA200609DB0 /* Debug */,
-				7989AC051CE9DDA200609DB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

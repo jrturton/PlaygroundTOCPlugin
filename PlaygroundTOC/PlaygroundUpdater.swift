@@ -8,11 +8,11 @@
 
 import Foundation
 
-func addNavigationLinks(linkText: String, toContents contents: NSURL) throws {
+func addNavigationLinks(_ linkText: String, toContents contents: URL) throws {
     
-    guard let contentsText = try? String(contentsOfURL: contents) else { return }
+    guard let contentsText = try? String(contentsOf: contents, encoding: .utf8) else { return }
     
-    var lines = contentsText.componentsSeparatedByString("\n")
+    var lines = contentsText.components(separatedBy: "\n")
     
     if linksExist(lines) {
         lines.removeLast()
@@ -22,12 +22,12 @@ func addNavigationLinks(linkText: String, toContents contents: NSURL) throws {
     lines.append(linkText)
     lines.append("")
     
-    let newContents = lines.joinWithSeparator("\n")
+    let newContents = lines.joined(separator: "\n")
     
-    try newContents.writeToURL(contents, atomically: true, encoding: NSUTF8StringEncoding)
+    try newContents.write(to: contents, atomically: true, encoding: String.Encoding.utf8)
 }
 
-private func linksExist(lines: [String]) -> Bool {
+private func linksExist(_ lines: [String]) -> Bool {
     // Assuming a MD comment line followed by an empty line is existing navigation links
     
     if lines.count < 3 {
